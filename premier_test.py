@@ -16,12 +16,11 @@ for nb, configuration in enumerate(itertools.permutations(list_of_actions)):
     gain = 0
     all_actions = []
     i += 1
-    # print(f"étape {i} / {all_configuration} soit {i * 100 / all_configuration}")
+    
     for index, action in enumerate(configuration):
         if total + action[1] < maximal_budget:
             total += action[1]
             gain += action[1]*action[2]
-            # print(f"total: {total}, action: {action[0]}")
         else:
             all_actions = configuration[:index]
             if gain not in all_gain:
