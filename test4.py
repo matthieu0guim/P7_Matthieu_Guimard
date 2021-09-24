@@ -18,11 +18,13 @@ def marre(liste, n, p):
     return p
 
 liste =  [('Action_1', 20, 0.05), ('Action_2', 30, 0.1), ('Action_3', 50, 0.15), ('Action_4', 70, 0.2)]
+revenus = [1.0, 3.0, 7.5, 14.0]
+print(revenus)
+# budget = 60
 comb = []
-for i in range(1, 5):
-    # marre(liste, i, comb)
-    marre(list_of_actions, i, comb)
-for i in comb:
-    print(i)
+# for i in range(1, 5):
+#     marre(liste, i, comb)
+    # marre(list_of_actions, i, comb)
 
-
+# for i in comb:
+#     print(i)

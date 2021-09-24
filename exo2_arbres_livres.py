@@ -11,8 +11,9 @@ class BinaryTree:
             self.leftChild = BinaryTree(newNode)
             self.leftChild.parent = self
             toAdd = self.getRootVal()
-            self.config.append(toAdd)
-            print("ajout d'un élément dans la liste")
+            # self.config.append(toAdd)
+            # self.config.append(newNode)
+            # print("ajout d'un élément dans la liste")
             print(self.config)
         else:
             t = BinaryTree(newNode)
@@ -20,8 +21,9 @@ class BinaryTree:
             self.leftChild = t
             self.leftChild.parent = self
             toAdd = self.getRootVal()
-            self.config.append(toAdd)
-            print("ajout d'un élément dans la liste")
+            # self.config.append(toAdd)
+            # self.config.append(newNode)
+            # print("ajout d'un élément dans la liste")
     
     def insertRight(self, newNode):
         if self.rightChild == None:
