@@ -60,7 +60,7 @@ print(f"Avec récursion, le programme met {end - start} à s'éxécuter")
 
 # print(our_tree.getLeftChild().getRootVal())
 
-# liste =  [('Action_1', 20, 0.05), ('Action_2', 30, 0.1), ('Action_3', 50, 0.15), ('Action_4', 70, 0.2)]
+# liste =  wow
 # revenus = [1.0, 3.0, 7.5, 14.0]
 # our_tree = BinaryTree('config')
 # b = knapstack(liste, revenus, 100, len(liste)-1, our_tree)

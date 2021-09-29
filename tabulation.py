@@ -12,11 +12,19 @@ start = time.time()
 # print(table)
 
 """realistic case"""
-first_tab = pd.read_csv("partie_1.csv", sep=';', encoding='latin-1')
+# first_tab = pd.read_csv("partie_1.csv", sep=';', encoding='latin-1')
+
+"""big number of data"""
+first_tab = pd.read_csv("dataset2_Python+P7.csv", sep=',', encoding='latin-1')
+first_tab.loc[first_tab['price'] <= 0] = 600 # some values are <= 0 so i replace this value with a price higher that our budget
+# print(first_tab.loc[first_tab['price'] <= 0].shape)
+
 list_of_actions = [(first_tab.loc[i].values[0], first_tab.loc[i].values[1], first_tab.loc[i].values[2]) for i in range(len(first_tab))]
-weights = [action[1] for action in list_of_actions]
-profits = [round(action[1] * action[2], 2) for action in list_of_actions]
-table = np.zeros((len(list_of_actions) + 1, 500))
+weights = [action[1]*100 for action in list_of_actions]
+profits = [round(action[1] * action[2]/100, 2) for action in list_of_actions]
+table = np.zeros((len(list_of_actions) + 1, 50001))
+
+
 
 # for i in range(0, len(actions) + 1):
 for i in range(0, len(list_of_actions) + 1):
@@ -27,7 +35,8 @@ for i in range(0, len(list_of_actions) + 1):
         elif weights[i-1] > j:
             table[i][j] = table[i-1][j]
         else:
-            table[i][j] = max(table[i-1][j], profits[i-1] + table[i-1][j - weights[i-1]])
+            # print(int(j - weights[i-1]))
+            table[i][j] = max(table[i-1][j], profits[i-1] + table[i-1][int(j - weights[i-1])])
 
 print(f"maximum profit: {table[-1][-1]}")
 print(f"le programme de programmation dynamique met:{time.time() - start} secondes")
