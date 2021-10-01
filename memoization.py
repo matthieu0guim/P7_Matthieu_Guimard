@@ -9,7 +9,7 @@ list_of_actions = [(first_tab.loc[i].values[0], first_tab.loc[i].values[1], firs
 list_of_profits = [round(action[1] * action[2], 2) for action in list_of_actions]
 table = np.ones((500, len(list_of_actions)))
 
-def memoization(actions, profits, remaining_budget, item_number):
+def memoization(actions, profits, remaining_budget, item_number, element_selection = []):
     global final_configuration
     global table
     if item_number == -1  or remaining_budget == 0:
@@ -17,21 +17,23 @@ def memoization(actions, profits, remaining_budget, item_number):
     if table[remaining_budget][item_number] != 1:
         return table[remaining_budget][item_number]
     if actions[item_number][1] > remaining_budget:
-        return memoization(actions, profits, remaining_budget, item_number - 1)
-        
+        return memoization(actions, profits, remaining_budget, item_number - 1, element_selection)[0]
+
     else:
         left_choice = memoization(actions,
                                 profits,
                                 remaining_budget,
                                 item_number-1,
-                        )
+                                element_selection
+                                )[0]
         right_choice =  profits[item_number] + memoization(actions,
                                                            profits,
                                                            remaining_budget - actions[item_number][1],
                                                            item_number-1,
-                                                    )
+                                                           element_selection + [actions[item_number]]
+                                                          )[0]
         table[remaining_budget][item_number] = max(left_choice, right_choice)
-        return table[remaining_budget][item_number]
+        return (table[remaining_budget][item_number], element_selection)
 
 a = memoization(list_of_actions, list_of_profits, 499, len(list_of_actions)-1)
 print(a)
