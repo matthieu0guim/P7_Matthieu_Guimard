@@ -12,17 +12,17 @@ start = time.time()
 # print(table)
 
 """realistic case"""
-# first_tab = pd.read_csv("partie_1.csv", sep=';', encoding='latin-1')
+first_tab = pd.read_csv("data/partie_1.csv", sep=';', encoding='latin-1')
 
 """big number of data"""
-first_tab = pd.read_csv("dataset2_Python+P7.csv", sep=',', encoding='latin-1')
-first_tab.loc[first_tab['price'] <= 0] = 600 # some values are <= 0 so i replace this value with a price higher that our budget
+# first_tab = pd.read_csv("data/dataset2_Python+P7.csv", sep=',', encoding='latin-1')
+# first_tab.loc[first_tab['price'] <= 0] = 600 # some values are <= 0 so i replace this value with a price higher that our budget
 # print(first_tab.loc[first_tab['price'] <= 0].shape)
 
 list_of_actions = [(first_tab.loc[i].values[0], first_tab.loc[i].values[1], first_tab.loc[i].values[2]) for i in range(len(first_tab))]
 weights = [action[1]*100 for action in list_of_actions]
-profits = [round(action[1] * action[2]/100, 2) for action in list_of_actions]
-table = np.zeros((len(list_of_actions) + 1, 50001))
+profits = [round(action[1] * action[2], 2) for action in list_of_actions]
+table = np.zeros((len(list_of_actions) + 1, 501))
 
 
 

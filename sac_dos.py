@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import time
 
-first_tab = pd.read_csv("partie_1.csv", sep=';', encoding='latin-1')
+first_tab = pd.read_csv("data/partie_1.csv", sep=';', encoding='latin-1')
 list_of_actions = [(first_tab.loc[i].values[0], first_tab.loc[i].values[1], round(first_tab.loc[i].values[2] * first_tab.loc[i].values[1], 2)) for i in range(len(first_tab))]
 list_of_profits = [round(action[1] * action[2], 2) for action in list_of_actions]
 
@@ -29,5 +29,5 @@ print(a)
 
 print(f"Avec combinaison restaurée, le programme prend {time.time() - start}s")
 
-print(sum([action[1] for action in a[1]]))
+print(f"investissment de {sum([action[1] for action in a[1]])}")
 

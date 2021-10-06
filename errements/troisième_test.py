@@ -13,6 +13,7 @@ def taken(action, budget, revenu, configuration):
 
 def not_taken(action):
     return
+
 def make_instance(a):
     a = Action(a[0], a[1], a[2])
     return a
