@@ -10,14 +10,12 @@ config = []
 user_choice = input("Voulez-vous tester le dataset1 ou le dataset2?")
 
 new_tab = pd.read_csv(f"data/{user_choice}_Python+P7.csv", sep=';', encoding='latin-1')
-first_tab = new_tab.loc[new_tab['price'] > 0 | new_tab['name'].isnull() | new_tab['name'].isna()].reset_index()
+first_tab = new_tab.loc[new_tab['price'] > 0].reset_index()
 list_of_actions = [(first_tab['name'][i], first_tab['price'][i], first_tab['profit'][i]) for i in range(len(first_tab))]
 weights = [action[1]*100 for action in list_of_actions]
 profits = [round(action[1] * action[2]/100, 2) for action in list_of_actions]
 table = np.zeros((len(list_of_actions) + 1, 50001))
 
-print(f" nombre de données avec un prix <= 0: {len(new_tab.loc[new_tab['price'] <= 0 | new_tab['name'].isnull() | new_tab['name'].isna()])}")
-exit()
 for i in range(0, len(list_of_actions) + 1):
     for j in range(0, len(table[0])):
         # base case
