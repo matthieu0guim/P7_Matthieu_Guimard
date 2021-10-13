@@ -5,16 +5,21 @@ import time
 start = time.time()
 config = []
 
-"""big number of data"""
-#todo demander le nom du fichier en ligne de commande
-user_choice = input("Voulez-vous tester le dataset1 ou le dataset2?")
+""" test case """
+first_tab = pd.read_csv("data/partie_1.csv", sep=';', encoding='latin-1')
+list_of_actions = [(first_tab.loc[i].values[0], first_tab.loc[i].values[1], first_tab.loc[i].values[2]) for i in range(len(first_tab))]
+weights = [action[1] for action in list_of_actions]
+profits = [round(action[1] * action[2], 2) for action in list_of_actions]
+table = np.zeros((len(list_of_actions) + 1, 501))
 
-new_tab = pd.read_csv(f"data/{user_choice}_Python+P7.csv", sep=';', encoding='latin-1')
-first_tab = new_tab.loc[new_tab['price'] > 0].reset_index()
-list_of_actions = [(first_tab['name'][i], first_tab['price'][i], first_tab['profit'][i]) for i in range(len(first_tab))]
-weights = [action[1]*100 for action in list_of_actions]
-profits = [round(action[1] * action[2]/100, 2) for action in list_of_actions]
-table = np.zeros((len(list_of_actions) + 1, 50001))
+"""big number of data"""
+# user_choice = input("Voulez-vous tester le dataset1 ou le dataset2?")
+# new_tab = pd.read_csv(f"data/{user_choice}_Python+P7.csv", sep=';', encoding='latin-1')
+# first_tab = new_tab.loc[new_tab['price'] > 0].reset_index()
+# list_of_actions = [(first_tab['name'][i], first_tab['price'][i], first_tab['profit'][i]) for i in range(len(first_tab))]
+# weights = [action[1]*100 for action in list_of_actions]
+# profits = [round(action[1] * action[2]/100, 2) for action in list_of_actions]
+# table = np.zeros((len(list_of_actions) + 1, 50001))
 
 for i in range(0, len(list_of_actions) + 1):
     for j in range(0, len(table[0])):
@@ -35,13 +40,15 @@ for i in range(len(list_of_actions) , 0, -1):
     if i == 764:
         print(list_of_actions[i - 1][1] )
 
-    if res <= 0 or list_of_actions[i - 1][1]*100 > w:
+    if res <= 0 or list_of_actions[i - 1][1] > w:#*100 > w: # think to add or remove the factor *100 if dealing with 20 actions or big dataset
+        
         break
     if res == table[i - 1][w]:
+        
         continue
     else:
-        print(f"i:{i}, w:{w}")
-        print(f"action: {list_of_actions[i - 1]}, weight: {weights[i-1]}")
+        # print(f"i:{i}, w:{w}")
+        # print(f"action: {list_of_actions[i - 1]}, weight: {weights[i-1]}")
         res = res - profits[i - 1]
         w = int(w - weights[i - 1])
         config.append(list_of_actions[i - 1])

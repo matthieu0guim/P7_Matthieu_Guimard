@@ -30,5 +30,5 @@ print(a)
 
 print(f"Avec combinaison restaurée, le programme prend {time.time() - start}s")
 
-print(f"investissment de {sum([action[1] for action in a[1]])}")
+print(f"investissement de {sum([action[1] for action in a[1]])}")
 
